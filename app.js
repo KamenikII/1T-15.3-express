@@ -13,7 +13,7 @@ app.post('/posts', async (req, res) => {
         await post.reload()
         return res.status(201).json(post)
     } catch (error) {
-        return res.status(400)
+        throw res.status(400)
     }
 })
 
@@ -25,7 +25,7 @@ app.get('/posts', async (req, res) => {
             data: posts
         })
     } catch (error) {
-        return res.status(400)
+        throw res.status(400)
     }
 })
 app.get('/posts/:id', async (req, res) => {
@@ -33,7 +33,7 @@ app.get('/posts/:id', async (req, res) => {
         const post = await Post.findByPk(req.params.id)
         return res.status(200).json(post)
     } catch (error) {
-        return res.status(400)
+        throw res.status(400)
     }
 })
 
@@ -47,7 +47,7 @@ app.patch('/posts/:id', async (req, res) => {
         await post.save()
         return res.status(200).json(post)
     } catch (error) {
-        return res.status(400)
+        throw res.status(400)
     }
 })
 
@@ -60,7 +60,7 @@ app.delete('/posts/:id', async (req, res) => {
             message: 'Post deleted successfully'
         })
     } catch (error) {
-        return res.status(400)
+        throw res.status(400)
     }
 })
 
@@ -73,6 +73,6 @@ app.listen(port, async () => {
             force: false
         })
     } catch (error) {
-        console.log(error)
+        throw error
     }
 })
